@@ -1,5 +1,3 @@
 
-Blueprint MY.ID Interface
+Workshop Cafe Trigger Test Ground
 =========
-
-The front end and firebase call back the MY.ID blueprint prototype.
