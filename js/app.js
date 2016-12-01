@@ -5,45 +5,45 @@ particle.login({username: 'weftech@gmail.com', password: 'W3Ftech@spark'});
 
 function greenSmall(){
   particle.callFunction({ deviceId: '23003c000947343432313031', name: 'TableNote', argument: 'green112', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
-  console.log('greenSmall')
+  console.log('green112')
 }
 
 function greenMed(){
   particle.callFunction({ deviceId: '23003c000947343432313031', name: 'TableNote', argument: 'green111', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
-  console.log('greenMed')
+  console.log('green111')
 }
 
 function greenLarge(){
   particle.callFunction({ deviceId: '23003c000947343432313031', name: 'TableNote', argument: 'green110', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
-  console.log('greenLarge')
+  console.log('green110')
 }
 
 function yellowSmall(){
-  particle.callFunction({ deviceId: '23003c000947343432313031', name: 'TableNote', argument: 'yellow112', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
-  console.log('yellowSmall')
+  particle.callFunction({ deviceId: '23003c000947343432313031', name: 'TableNote', argument: 'pulseRed112', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
+  console.log('pulseRed112')
 }
 
 function yellowMed(){
-  particle.callFunction({ deviceId: '23003c000947343432313031', name: 'TableNote', argument: 'yellow111', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
-  console.log('yellowMed')
+  particle.callFunction({ deviceId: '23003c000947343432313031', name: 'TableNote', argument: 'pulesRed111', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
+  console.log('pulesRed111')
 }
 
 function yellowLarge(){
-  particle.callFunction({ deviceId: '23003c000947343432313031', name: 'TableNote', argument: 'yellow110', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
-  console.log('yellowLarge')
+  particle.callFunction({ deviceId: '23003c000947343432313031', name: 'TableNote', argument: 'pulseRed110', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
+  console.log('pulseRed110')
 }
 
 function redSmall(){
   particle.callFunction({ deviceId: '23003c000947343432313031', name: 'TableNote', argument: 'red112', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
-  console.log('redSmall')
+  console.log('red112')
 }
 
 function redMed(){
   particle.callFunction({ deviceId: '23003c000947343432313031', name: 'TableNote', argument: 'red111', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
-  console.log('redMed')
+  console.log('red111')
 }
 
 function redLarge(){
   particle.callFunction({ deviceId: '23003c000947343432313031', name: 'TableNote', argument: 'red110', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
-  console.log('redLarge')
+  console.log('red110')
 }
