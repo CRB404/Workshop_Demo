@@ -24,8 +24,8 @@ function yellowSmall(){
 }
 
 function yellowMed(){
-  particle.callFunction({ deviceId: '23003c000947343432313031', name: 'TableNote', argument: 'pulesRed111', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
-  console.log('pulesRed111')
+  particle.callFunction({ deviceId: '23003c000947343432313031', name: 'TableNote', argument: 'pulseRed111', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
+  console.log('pulseRed111')
 }
 
 function yellowLarge(){
