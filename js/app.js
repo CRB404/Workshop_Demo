@@ -5,18 +5,18 @@ particle.login({username: 'weftech@gmail.com', password: 'W3Ftech@spark'});
 
 
 function green123(){
-  particle.callFunction({ deviceId: '1b003d001947353236343033', name: 'TableNote', argument: 'green123', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
-  console.log('green123')
+  particle.callFunction({ deviceId: '1b003d001947353236343033', name: 'TableNote', argument: 'green181', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
+  console.log('green181')
 }
 
 function green122(){
-  particle.callFunction({ deviceId: '1b003d001947353236343033', name: 'TableNote', argument: 'green122', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
-  console.log('green122')
+  particle.callFunction({ deviceId: '1b003d001947353236343033', name: 'TableNote', argument: 'green182', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
+  console.log('green182')
 }
 
 function green121(){
-  particle.callFunction({ deviceId: '1b003d001947353236343033', name: 'TableNote', argument: 'green121', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
-  console.log('green121')
+  particle.callFunction({ deviceId: '1b003d001947353236343033', name: 'TableNote', argument: 'green183', auth: '7dfb755486e5e116bf9a73c6764959c1180c64cf' });
+  console.log('green183')
 }
 
 function green120(){
