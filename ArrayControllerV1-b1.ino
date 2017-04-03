@@ -3,6 +3,7 @@
 SYSTEM_MODE(AUTOMATIC);
 
 //int led = D0; // This is where your LED is plugged in. The other side goes to a resistor connected to GND.
+int boardLed = D7; // This is the LED that is already on your device.
 int brewCoffee(String command);
 //strip0
 const int FADE_LENGTH_0 = 5;
@@ -22,19 +23,50 @@ const int SPEED = 80; // speed of leds
 int stateController[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 String cmd[] = {"green1", "pulse1", "white1", "green2", "pulse2", "white2", "green3", "pulse3", "white3", "green4", "pulse4", "white4", "green5", "pulse5", "white5", "green6", "pulse6", "white6", "green7", "pulse7", "white7", "green8", "pulse8", "white8", "off1", "off2", "off3", "off4", "off5", "off6", "off7", "off8"};
 
+// const int RED =
+// const int GREEN =
+// const int BLUE =
 
-Adafruit_NeoPixel strip0 = Adafruit_NeoPixel(RING_SIZE_0 , D0, WS2812B); // Seat 1
-Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(RING_SIZE_0 , D1, WS2812B); // Seat 2
-Adafruit_NeoPixel strip2 = Adafruit_NeoPixel(RING_SIZE_0 , D2, WS2812B); // Seat 3
-Adafruit_NeoPixel strip3 = Adafruit_NeoPixel(RING_SIZE_0 , D3, WS2812B); // Seat 4
-Adafruit_NeoPixel strip4 = Adafruit_NeoPixel(RING_SIZE_0 , D4, WS2812B); // Seat 5
-Adafruit_NeoPixel strip5 = Adafruit_NeoPixel(RING_SIZE_0 , D5, WS2812B); // Seat 6
-Adafruit_NeoPixel strip6 = Adafruit_NeoPixel(RING_SIZE_0 , D6, WS2812B); // Seat 7
-Adafruit_NeoPixel strip7 = Adafruit_NeoPixel(RING_SIZE_0 , D7, WS2812B); // Seat 8
 
+
+int pinA0 = 000 ;//Seat Number
+int pinA1 = 000 ;//Seat Number
+int pinA2 = 000 ;//Seat Number
+int pinA3 = 000 ;//Seat Number
+int pinA4 = 000 ;//Seat Number
+int pinA5 = 000 ;//Seat Number
+int pinA6 = 000 ;//Seat Number
+int pinA7 = 000 ;//Seat Number
+
+
+
+int LastStateStrip0 = 0;
+int LastStateStrip1 = 0;
+int LastStateStrip2 = 0;
+int LastStateStrip3 = 0;
+int LastStateStrip4 = 0;
+int LastStateStrip5 = 0;
+int LastStateStrip6 = 0;
+int LastStateStrip7 = 0;
+
+Adafruit_NeoPixel strip0 = Adafruit_NeoPixel(RING_SIZE_0 , D0, WS2812B); // Large
+Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(RING_SIZE_0 , D1, WS2812B); // Medium
+Adafruit_NeoPixel strip2 = Adafruit_NeoPixel(RING_SIZE_0 , D2, WS2812B); // Small
+Adafruit_NeoPixel strip3 = Adafruit_NeoPixel(RING_SIZE_0 , A3, WS2812B); // Large
+Adafruit_NeoPixel strip4 = Adafruit_NeoPixel(RING_SIZE_0 , D4, WS2812B); // Medium
+Adafruit_NeoPixel strip5 = Adafruit_NeoPixel(RING_SIZE_0 , D5, WS2812B); // Small
+Adafruit_NeoPixel strip6 = Adafruit_NeoPixel(RING_SIZE_0 , D6, WS2812B); // Large
+Adafruit_NeoPixel strip7 = Adafruit_NeoPixel(RING_SIZE_0 , D7, WS2812B); // Medium
+Adafruit_NeoPixel strip8 = Adafruit_NeoPixel(RING_SIZE_0 , A0, WS2812B); // Small
+Adafruit_NeoPixel strip9 = Adafruit_NeoPixel(RING_SIZE_0 , A1, WS2812B); // Large
+Adafruit_NeoPixel strip10 = Adafruit_NeoPixel(RING_SIZE_0 , A2, WS2812B); // Medium
+Adafruit_NeoPixel strip11 = Adafruit_NeoPixel(RING_SIZE_0 , D3, WS2812B); // Small
+Adafruit_NeoPixel strip12 = Adafruit_NeoPixel(RING_SIZE_0 , A4, WS2812B); // Large
+Adafruit_NeoPixel strip13 = Adafruit_NeoPixel(RING_SIZE_0 , A5, WS2812B);
 
 void setup() {
   //pinMode(led,OUTPUT);
+  pinMode(boardLed, OUTPUT);
 
   pinMode(A0, OUTPUT);
   pinMode(A1, OUTPUT);
@@ -79,6 +111,32 @@ void setup() {
   strip7.show();
   strip7.setBrightness(100);
 
+  strip8.begin();
+  strip8.show();
+  strip8.setBrightness(100);
+
+  strip9.begin();
+  strip9.show();
+  strip9.setBrightness(100);
+
+  strip10.begin();
+  strip10.show();
+  strip10.setBrightness(100);
+
+  strip11.begin();
+  strip11.show();
+  strip11.setBrightness(100);
+
+  strip12.begin();
+  strip12.show();
+  strip12.setBrightness(100);
+
+
+  strip13.begin();
+  strip13.show();
+  strip13.setBrightness(100);
+
+
 }
 
 // Now for the loop.
@@ -101,7 +159,7 @@ int TableNotification(String command) {
   switch (i) {
 
 
-// Seat 1 ****************************************************************************************************
+// 181 ****************************************************************************************************
 
     case 0:
       if (stateController[0] == 1) {
@@ -190,7 +248,7 @@ int TableNotification(String command) {
 
 
 
-// Seat 2 ****************************************************************************************************
+// 182 ****************************************************************************************************
 
     case 3:
       if (stateController[1] == 1) {
@@ -279,14 +337,14 @@ int TableNotification(String command) {
 
 
 
-// Seat 3 ****************************************************************************************************
+// 183 ****************************************************************************************************
 
 
 
     case 6:
       if (stateController[2] == 1) {
-        for (int i = 0; i < strip2.numPixels(); i++) {
-          strip2.setPixelColor(i, 0, 255, 0); strip2.setBrightness(20); strip2.show(); delay(1);
+        for (int i = 0; i < strip13.numPixels(); i++) {
+          strip13.setPixelColor(i, 0, 255, 0); strip13.setBrightness(20); strip13.show(); delay(1);
         }
         return 0;
       }
@@ -294,44 +352,44 @@ int TableNotification(String command) {
       else if (stateController[2] != 1){
         stateController[2] = 1;
 
-        for (int i = 0; i < strip2.numPixels(); i++) {
-          strip2.setPixelColor(i, 0, 255, 0);
+        for (int i = 0; i < strip13.numPixels(); i++) {
+          strip13.setPixelColor(i, 0, 255, 0);
         }
 
-        for (int i = 10; i < 20; i++) { strip2.setBrightness(i); strip2.show(); delay(30); }
-        for (int i = 20; i > 10; i--) { strip2.setBrightness(i); strip2.show(); delay(30); }
-        for (int i = 10; i < 20; i++) { strip2.setBrightness(i); strip2.show(); delay(30); }
+        for (int i = 10; i < 20; i++) { strip13.setBrightness(i); strip13.show(); delay(30); }
+        for (int i = 20; i > 10; i--) { strip13.setBrightness(i); strip13.show(); delay(30); }
+        for (int i = 10; i < 20; i++) { strip13.setBrightness(i); strip13.show(); delay(30); }
         return 0;
       }
 
       break;
 
     case 7:
-      for (int i = 0; i < strip2.numPixels(); i++) {
-        strip2.setPixelColor(i, 250, 0, 0);
+      for (int i = 0; i < strip13.numPixels(); i++) {
+        strip13.setPixelColor(i, 250, 0, 0);
       }
-      for (int i = 10; i < 20; i++) { strip2.setBrightness(i); strip2.show(); delay(30); }
-      for (int i = 20; i > 10; i--) { strip2.setBrightness(i); strip2.show(); delay(30); }
-      for (int i = 10; i < 20; i++) { strip2.setBrightness(i); strip2.show(); delay(30); }
-      for (int i = 20; i > 10; i--) { strip2.setBrightness(i); strip2.show(); delay(30); }
-      for (int i = 10; i < 20; i++) { strip2.setBrightness(i); strip2.show(); delay(30); }
-      for (int i = 20; i > 10; i--) { strip2.setBrightness(i); strip2.show(); delay(30); }
-      for (int i = 10; i < 20; i++) { strip2.setBrightness(i); strip2.show(); delay(30); }
-      for (int i = 20; i > 10; i--) { strip2.setBrightness(i); strip2.show(); delay(30); }
-      for (int i = 10; i < 20; i++) { strip2.setBrightness(i); strip2.show(); delay(30); }
-      for (int i = 20; i > 10; i--) { strip2.setBrightness(i); strip2.show(); delay(30); }
-      for (int i = 10; i < 20; i++) { strip2.setBrightness(i); strip2.show(); delay(30); }
+      for (int i = 10; i < 20; i++) { strip13.setBrightness(i); strip13.show(); delay(30); }
+      for (int i = 20; i > 10; i--) { strip13.setBrightness(i); strip13.show(); delay(30); }
+      for (int i = 10; i < 20; i++) { strip13.setBrightness(i); strip13.show(); delay(30); }
+      for (int i = 20; i > 10; i--) { strip13.setBrightness(i); strip13.show(); delay(30); }
+      for (int i = 10; i < 20; i++) { strip13.setBrightness(i); strip13.show(); delay(30); }
+      for (int i = 20; i > 10; i--) { strip13.setBrightness(i); strip13.show(); delay(30); }
+      for (int i = 10; i < 20; i++) { strip13.setBrightness(i); strip13.show(); delay(30); }
+      for (int i = 20; i > 10; i--) { strip13.setBrightness(i); strip13.show(); delay(30); }
+      for (int i = 10; i < 20; i++) { strip13.setBrightness(i); strip13.show(); delay(30); }
+      for (int i = 20; i > 10; i--) { strip13.setBrightness(i); strip13.show(); delay(30); }
+      for (int i = 10; i < 20; i++) { strip13.setBrightness(i); strip13.show(); delay(30); }
 
       if (stateController[2] == 1) {
-        for (int i = 0; i < strip2.numPixels(); i++) {
-          strip2.setPixelColor(i, 0, 255, 0); strip2.setBrightness(20); strip2.show(); delay(1);
+        for (int i = 0; i < strip13.numPixels(); i++) {
+          strip13.setPixelColor(i, 0, 255, 0); strip13.setBrightness(20); strip13.show(); delay(1);
         }
         return 0;
       }
 
       else if (stateController[2] == 2){
-        for (int i = 0; i < strip2.numPixels(); i++) {
-          strip2.setPixelColor(i, 255, 255, 255); strip2.setBrightness(20); strip2.show(); delay(1);
+        for (int i = 0; i < strip13.numPixels(); i++) {
+          strip13.setPixelColor(i, 255, 255, 255); strip13.setBrightness(20); strip13.show(); delay(1);
         }
         return 0;
       }
@@ -347,8 +405,8 @@ int TableNotification(String command) {
 
     case 8:
       if (stateController[2] == 2) {
-        for (int i = 0; i < strip2.numPixels(); i++) {
-          strip2.setPixelColor(i, 255, 255, 255); strip2.setBrightness(20); strip2.show(); delay(1);
+        for (int i = 0; i < strip13.numPixels(); i++) {
+          strip13.setPixelColor(i, 255, 255, 255); strip13.setBrightness(20); strip13.show(); delay(1);
         }
         return 0;
       }
@@ -356,13 +414,13 @@ int TableNotification(String command) {
       else if (stateController[2] != 2){
         stateController[2] = 2;
 
-        for (int i = 0; i < strip2.numPixels(); i++) {
-          strip2.setPixelColor(i, 255, 255, 255);
+        for (int i = 0; i < strip13.numPixels(); i++) {
+          strip13.setPixelColor(i, 255, 255, 255);
         }
 
-        for (int i = 10; i < 20; i++) { strip2.setBrightness(i); strip2.show(); delay(30); }
-        for (int i = 20; i > 10; i--) { strip2.setBrightness(i); strip2.show(); delay(30); }
-        for (int i = 10; i < 20; i++) { strip2.setBrightness(i); strip2.show(); delay(30); }
+        for (int i = 10; i < 20; i++) { strip13.setBrightness(i); strip13.show(); delay(30); }
+        for (int i = 20; i > 10; i--) { strip13.setBrightness(i); strip13.show(); delay(30); }
+        for (int i = 10; i < 20; i++) { strip13.setBrightness(i); strip13.show(); delay(30); }
         return 0;
       }
 
@@ -371,14 +429,14 @@ int TableNotification(String command) {
 
 
 
-// Seat 4 ****************************************************************************************************
+// 184 ****************************************************************************************************
 
 
 
     case 9:
       if (stateController[3] == 1) {
-        for (int i = 0; i < strip3.numPixels(); i++) {
-          strip3.setPixelColor(i, 0, 255, 0); strip3.setBrightness(20); strip3.show(); delay(1);
+        for (int i = 0; i < strip12.numPixels(); i++) {
+          strip12.setPixelColor(i, 0, 255, 0); strip12.setBrightness(20); strip12.show(); delay(1);
         }
         return 0;
       }
@@ -386,44 +444,44 @@ int TableNotification(String command) {
       else if (stateController[3] != 1){
         stateController[3] = 1;
 
-        for (int i = 0; i < strip3.numPixels(); i++) {
-          strip3.setPixelColor(i, 0, 255, 0);
+        for (int i = 0; i < strip12.numPixels(); i++) {
+          strip12.setPixelColor(i, 0, 255, 0);
         }
 
-        for (int i = 10; i < 20; i++) { strip3.setBrightness(i); strip3.show(); delay(30); }
-        for (int i = 20; i > 10; i--) { strip3.setBrightness(i); strip3.show(); delay(30); }
-        for (int i = 10; i < 20; i++) { strip3.setBrightness(i); strip3.show(); delay(30); }
+        for (int i = 10; i < 20; i++) { strip12.setBrightness(i); strip12.show(); delay(30); }
+        for (int i = 20; i > 10; i--) { strip12.setBrightness(i); strip12.show(); delay(30); }
+        for (int i = 10; i < 20; i++) { strip12.setBrightness(i); strip12.show(); delay(30); }
         return 0;
       }
 
       break;
 
     case 10:
-      for (int i = 0; i < strip3.numPixels(); i++) {
-        strip3.setPixelColor(i, 250, 0, 0);
+      for (int i = 0; i < strip12.numPixels(); i++) {
+        strip12.setPixelColor(i, 250, 0, 0);
       }
-      for (int i = 10; i < 20; i++) { strip3.setBrightness(i); strip3.show(); delay(30); }
-      for (int i = 20; i > 10; i--) { strip3.setBrightness(i); strip3.show(); delay(30); }
-      for (int i = 10; i < 20; i++) { strip3.setBrightness(i); strip3.show(); delay(30); }
-      for (int i = 20; i > 10; i--) { strip3.setBrightness(i); strip3.show(); delay(30); }
-      for (int i = 10; i < 20; i++) { strip3.setBrightness(i); strip3.show(); delay(30); }
-      for (int i = 20; i > 10; i--) { strip3.setBrightness(i); strip3.show(); delay(30); }
-      for (int i = 10; i < 20; i++) { strip3.setBrightness(i); strip3.show(); delay(30); }
-      for (int i = 20; i > 10; i--) { strip3.setBrightness(i); strip3.show(); delay(30); }
-      for (int i = 10; i < 20; i++) { strip3.setBrightness(i); strip3.show(); delay(30); }
-      for (int i = 20; i > 10; i--) { strip3.setBrightness(i); strip3.show(); delay(30); }
-      for (int i = 10; i < 20; i++) { strip3.setBrightness(i); strip3.show(); delay(30); }
+      for (int i = 10; i < 20; i++) { strip12.setBrightness(i); strip12.show(); delay(30); }
+      for (int i = 20; i > 10; i--) { strip12.setBrightness(i); strip12.show(); delay(30); }
+      for (int i = 10; i < 20; i++) { strip12.setBrightness(i); strip12.show(); delay(30); }
+      for (int i = 20; i > 10; i--) { strip12.setBrightness(i); strip12.show(); delay(30); }
+      for (int i = 10; i < 20; i++) { strip12.setBrightness(i); strip12.show(); delay(30); }
+      for (int i = 20; i > 10; i--) { strip12.setBrightness(i); strip12.show(); delay(30); }
+      for (int i = 10; i < 20; i++) { strip12.setBrightness(i); strip12.show(); delay(30); }
+      for (int i = 20; i > 10; i--) { strip12.setBrightness(i); strip12.show(); delay(30); }
+      for (int i = 10; i < 20; i++) { strip12.setBrightness(i); strip12.show(); delay(30); }
+      for (int i = 20; i > 10; i--) { strip12.setBrightness(i); strip12.show(); delay(30); }
+      for (int i = 10; i < 20; i++) { strip12.setBrightness(i); strip12.show(); delay(30); }
 
       if (stateController[3] == 1) {
-        for (int i = 0; i < strip3.numPixels(); i++) {
-          strip3.setPixelColor(i, 0, 255, 0); strip3.setBrightness(20); strip3.show(); delay(1);
+        for (int i = 0; i < strip12.numPixels(); i++) {
+          strip12.setPixelColor(i, 0, 255, 0); strip12.setBrightness(20); strip12.show(); delay(1);
         }
         return 0;
       }
 
       else if (stateController[3] == 2){
-        for (int i = 0; i < strip3.numPixels(); i++) {
-          strip3.setPixelColor(i, 255, 255, 255); strip3.setBrightness(20); strip3.show(); delay(1);
+        for (int i = 0; i < strip12.numPixels(); i++) {
+          strip12.setPixelColor(i, 255, 255, 255); strip12.setBrightness(20); strip12.show(); delay(1);
         }
         return 0;
       }
@@ -439,8 +497,8 @@ int TableNotification(String command) {
 
     case 11:
       if (stateController[3] == 2) {
-        for (int i = 0; i < strip3.numPixels(); i++) {
-          strip3.setPixelColor(i, 255, 255, 255); strip3.setBrightness(20); strip3.show(); delay(1);
+        for (int i = 0; i < strip12.numPixels(); i++) {
+          strip12.setPixelColor(i, 255, 255, 255); strip12.setBrightness(20); strip12.show(); delay(1);
         }
         return 0;
       }
@@ -448,13 +506,13 @@ int TableNotification(String command) {
       else if (stateController[3] != 2){
         stateController[3] = 2;
 
-        for (int i = 0; i < strip3.numPixels(); i++) {
-          strip3.setPixelColor(i, 255, 255, 255);
+        for (int i = 0; i < strip12.numPixels(); i++) {
+          strip12.setPixelColor(i, 255, 255, 255);
         }
 
-        for (int i = 10; i < 20; i++) { strip3.setBrightness(i); strip3.show(); delay(30); }
-        for (int i = 20; i > 10; i--) { strip3.setBrightness(i); strip3.show(); delay(30); }
-        for (int i = 10; i < 20; i++) { strip3.setBrightness(i); strip3.show(); delay(30); }
+        for (int i = 10; i < 20; i++) { strip12.setBrightness(i); strip12.show(); delay(30); }
+        for (int i = 20; i > 10; i--) { strip12.setBrightness(i); strip12.show(); delay(30); }
+        for (int i = 10; i < 20; i++) { strip12.setBrightness(i); strip12.show(); delay(30); }
         return 0;
       }
 
@@ -462,7 +520,7 @@ int TableNotification(String command) {
 
 
 
-// Seat 5 ****************************************************************************************************
+// 185 ****************************************************************************************************
 
 
 
@@ -553,7 +611,7 @@ int TableNotification(String command) {
 
 
 
-// Seat 6 ****************************************************************************************************
+// 186 ****************************************************************************************************
 
 
 
@@ -644,7 +702,7 @@ int TableNotification(String command) {
 
 
 
-// Seat 7 ****************************************************************************************************
+// 187 ****************************************************************************************************
 
 
 
@@ -735,7 +793,7 @@ int TableNotification(String command) {
 
 
 
-// Seat 7 ****************************************************************************************************
+// 188 ****************************************************************************************************
 
 
 
@@ -826,7 +884,7 @@ int TableNotification(String command) {
 
 
 
-// off Seat 1
+// off 181
     case 24:
       stateController[0] = 0;
       for (int i = 0; i < strip0.numPixels(); i++) {
@@ -834,7 +892,7 @@ int TableNotification(String command) {
       }
       break;
 
-// off Seat 2
+// off 182
     case 25:
       stateController[1] = 0;
       for (int i = 0; i < strip1.numPixels(); i++) {
@@ -842,7 +900,7 @@ int TableNotification(String command) {
       }
       break;
 
-// off Seat 3
+// off 183
     case 26:
       stateController[2] = 0;
       for (int i = 0; i < strip2.numPixels(); i++) {
@@ -850,7 +908,7 @@ int TableNotification(String command) {
       }
       break;
 
-// off Seat 4
+// off 184
     case 27:
       stateController[3] = 0;
       for (int i = 0; i < strip3.numPixels(); i++) {
@@ -858,7 +916,7 @@ int TableNotification(String command) {
       }
       break;
 
-// off Seat 5
+// off 185
     case 28:
       stateController[4] = 0;
       for (int i = 0; i < strip4.numPixels(); i++) {
@@ -866,7 +924,7 @@ int TableNotification(String command) {
       }
       break;
 
-// off Seat 5
+// off 186
     case 29:
       stateController[5] = 0;
       for (int i = 0; i < strip5.numPixels(); i++) {
@@ -874,7 +932,7 @@ int TableNotification(String command) {
       }
       break;
 
-// off Seat 7
+// off 187
     case 30:
       stateController[6] = 0;
       for (int i = 0; i < strip6.numPixels(); i++) {
@@ -882,7 +940,7 @@ int TableNotification(String command) {
       }
       break;
 
-// off Seat 8
+// off 188
     case 31:
       stateController[7] = 0;
       for (int i = 0; i < strip7.numPixels(); i++) {

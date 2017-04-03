@@ -1,28 +1,26 @@
-// This #include statement was automatically added by the Particle IDE.
+// Library call. This #include statement was automatically added by the Particle IDE.
 #include "neopixel/neopixel.h"
 SYSTEM_MODE(AUTOMATIC);
 
-//int led = D0; // This is where your LED is plugged in. The other side goes to a resistor connected to GND.
-int brewCoffee(String command);
-//strip0
+// behavior variables
 const int FADE_LENGTH_0 = 5;
 const int FADE_SCALE_0  = 128;
 const int RING_SIZE_0   = 10;
-//strip1
 const int FADE_LENGTH_1 = 5;
 const int FADE_SCALE_1  = 128;
 const int RING_SIZE_1   = 10;
-//strip2
 const int FADE_LENGTH_2 = 5;
 const int FADE_SCALE_2  = 128;
 const int RING_SIZE_2   = 10;
 
 const int SPEED = 80; // speed of leds
 
+// State controller. the array handles the state of the light as 0, 1 or 2. off is 0, occupied is 1 and unoccupied is 2
+// The String cmd[] array contains all messages the board expects to receive. these MUST be changed in concert with what the workshop cafe server outputs.
 int stateController[] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 String cmd[] = {"green1", "pulse1", "white1", "green2", "pulse2", "white2", "green3", "pulse3", "white3", "green4", "pulse4", "white4", "green5", "pulse5", "white5", "green6", "pulse6", "white6", "green7", "pulse7", "white7", "green8", "pulse8", "white8", "off1", "off2", "off3", "off4", "off5", "off6", "off7", "off8"};
 
-
+// delcares output pins for all pucks
 Adafruit_NeoPixel strip0 = Adafruit_NeoPixel(RING_SIZE_0 , D0, WS2812B); // Seat 1
 Adafruit_NeoPixel strip1 = Adafruit_NeoPixel(RING_SIZE_0 , D1, WS2812B); // Seat 2
 Adafruit_NeoPixel strip2 = Adafruit_NeoPixel(RING_SIZE_0 , D2, WS2812B); // Seat 3
@@ -34,17 +32,10 @@ Adafruit_NeoPixel strip7 = Adafruit_NeoPixel(RING_SIZE_0 , D7, WS2812B); // Seat
 
 
 void setup() {
-  //pinMode(led,OUTPUT);
-
-  pinMode(A0, OUTPUT);
-  pinMode(A1, OUTPUT);
-  pinMode(A2, OUTPUT);
-  pinMode(A3, OUTPUT);
-  pinMode(A4, OUTPUT);
-  pinMode(A5, OUTPUT);
-
+  // setup particle cloud function
   Particle.function("TableNote", TableNotification);
 
+  // initializes and sets brightness for all leds
   Serial.begin(9600);
 
   strip0.begin();
@@ -81,43 +72,42 @@ void setup() {
 
 }
 
-// Now for the loop.
+// Now for the loop. leave it empty
 void loop() {
 }
 
-// Custom Functions //
-int funcName(String extra) {
-  return 0;
-}
-
+// running particle cloud function
 int TableNotification(String command) {
   int i = -1;
-  for (i = 0; i <= sizeof(cmd)/sizeof(cmd[0]); i++) // notice the less than or equal to comparison
+  for (i = 0; i <= sizeof(cmd)/sizeof(cmd[0]); i++) // loop through all array elements
   {
-    if (command.equals(cmd[i])) // compare String myCommand and Array Element
+    if (command.equals(cmd[i])) // compare String command and Array Element
     break;
   }
 
-  switch (i) {
 
+  // main logic switch statement
+  switch (i) {
 
 // Seat 1 ****************************************************************************************************
 
-    case 0:
-      if (stateController[0] == 1) {
-        for (int i = 0; i < strip0.numPixels(); i++) {
-          strip0.setPixelColor(i, 0, 255, 0); strip0.setBrightness(20); strip0.show(); delay(1);
+    // set light to occupied
+    case 0: // case 0 corellates to "green1"
+      if (stateController[0] == 1) { // check state
+        for (int i = 0; i < strip0.numPixels(); i++) { // update color to the leds
+          strip0.setPixelColor(i, 0, 255, 0); strip0.setBrightness(20); strip0.show(); delay(1); // defines new color and brightness
         }
         return 0;
       }
 
-      else if (stateController[0] != 1){
-        stateController[0] = 1;
+      else if (stateController[0] != 1){ // check state
+        stateController[0] = 1; // set state to 1 (occupied)
 
-        for (int i = 0; i < strip0.numPixels(); i++) {
-          strip0.setPixelColor(i, 0, 255, 0);
+        for (int i = 0; i < strip0.numPixels(); i++) { // update color to the leds
+          strip0.setPixelColor(i, 0, 255, 0); // defines new color
         }
 
+        // animates the light with a pluse using the occupied color
         for (int i = 10; i < 20; i++) { strip0.setBrightness(i); strip0.show(); delay(30); }
         for (int i = 20; i > 10; i--) { strip0.setBrightness(i); strip0.show(); delay(30); }
         for (int i = 10; i < 20; i++) { strip0.setBrightness(i); strip0.show(); delay(30); }
@@ -126,10 +116,13 @@ int TableNotification(String command) {
 
       break;
 
-    case 1:
-      for (int i = 0; i < strip0.numPixels(); i++) {
-        strip0.setPixelColor(i, 250, 0, 0);
+    // set light to blink and then return to correct state
+    case 1: // case 1 corellates to "pulse1"
+      for (int i = 0; i < strip0.numPixels(); i++) { // update color to the leds
+        strip0.setPixelColor(i, 250, 0, 0); // defines new color
       }
+
+      // animates the light with a long pluse using the pulse color
       for (int i = 10; i < 20; i++) { strip0.setBrightness(i); strip0.show(); delay(30); }
       for (int i = 20; i > 10; i--) { strip0.setBrightness(i); strip0.show(); delay(30); }
       for (int i = 10; i < 20; i++) { strip0.setBrightness(i); strip0.show(); delay(30); }
@@ -142,44 +135,46 @@ int TableNotification(String command) {
       for (int i = 20; i > 10; i--) { strip0.setBrightness(i); strip0.show(); delay(30); }
       for (int i = 10; i < 20; i++) { strip0.setBrightness(i); strip0.show(); delay(30); }
 
-      if (stateController[0] == 1) {
+      if (stateController[0] == 1) { // check if state is occupied
         for (int i = 0; i < strip0.numPixels(); i++) {
-          strip0.setPixelColor(i, 0, 255, 0); strip0.setBrightness(20); strip0.show(); delay(1);
+          strip0.setPixelColor(i, 0, 255, 0); strip0.setBrightness(20); strip0.show(); delay(1); // resets color to state color
         }
         return 0;
       }
 
-      else if (stateController[0] == 2){
+      else if (stateController[0] == 2){ // check if state is UN occupied
         for (int i = 0; i < strip0.numPixels(); i++) {
-          strip0.setPixelColor(i, 255, 255, 255); strip0.setBrightness(20); strip0.show(); delay(1);
+          strip0.setPixelColor(i, 255, 255, 255); strip0.setBrightness(20); strip0.show(); delay(1); // resets color to state color
         }
         return 0;
       }
 
-      else if (stateController[0] == 0) {
+      else if (stateController[0] == 0) { // check if state is off
         for (int i = 0; i < strip0.numPixels(); i++) {
-          strip0.setPixelColor(i, 0, 0, 0); strip0.setBrightness(0); strip0.show(); delay(1);
+          strip0.setPixelColor(i, 0, 0, 0); strip0.setBrightness(0); strip0.show(); delay(1); // resets color to state color
         }
         return 0;
       }
 
       break;
 
-    case 2:
-      if (stateController[0] == 2) {
-        for (int i = 0; i < strip0.numPixels(); i++) {
-          strip0.setPixelColor(i, 255, 255, 255); strip0.setBrightness(20); strip0.show(); delay(1);
+    // set light to UN occupied
+    case 2: // case 2 corellates to "white1"
+      if (stateController[0] == 2) { // check state
+        for (int i = 0; i < strip0.numPixels(); i++) { // update color to the leds
+          strip0.setPixelColor(i, 255, 255, 255); strip0.setBrightness(20); strip0.show(); delay(1); // defines new color and brightness
         }
         return 0;
       }
 
-      else if (stateController[0] != 2){
-        stateController[0] = 2;
+      else if (stateController[0] != 2){ // check state
+        stateController[0] = 2; // set state to 2 (UN occupied)
 
-        for (int i = 0; i < strip0.numPixels(); i++) {
-          strip0.setPixelColor(i, 255, 255, 255);
+        for (int i = 0; i < strip0.numPixels(); i++) { // update color to the leds
+          strip0.setPixelColor(i, 255, 255, 255); // defines new color
         }
-
+        
+        // animates the light with a pluse using the occupied color
         for (int i = 10; i < 20; i++) { strip0.setBrightness(i); strip0.show(); delay(30); }
         for (int i = 20; i > 10; i--) { strip0.setBrightness(i); strip0.show(); delay(30); }
         for (int i = 10; i < 20; i++) { strip0.setBrightness(i); strip0.show(); delay(30); }
